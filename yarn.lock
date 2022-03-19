@@ -1173,9 +1173,9 @@
   resolved "https://registry.npmjs.org/@types/json5/-/json5-0.0.29.tgz"
   integrity sha1-7ihweulOEdK4J7y+UnC86n8+ce4=
 
-"@types/jsonwebtoken@*":
+"@types/jsonwebtoken@*", "@types/jsonwebtoken@^8.5.8":
   version "8.5.8"
-  resolved "https://registry.npmjs.org/@types/jsonwebtoken/-/jsonwebtoken-8.5.8.tgz"
+  resolved "https://registry.yarnpkg.com/@types/jsonwebtoken/-/jsonwebtoken-8.5.8.tgz#01b39711eb844777b7af1d1f2b4cf22fda1c0c44"
   integrity sha512-zm6xBQpFDIDM6o9r6HSgDeIcLy82TKWctCXEPbJJcXb5AKmi5BNNdLXneixK4lplX3PqIVcwLBCGE/kAGnlD4A==
   dependencies:
     "@types/node" "*"
@@ -1184,13 +1184,6 @@
   version "8.5.4"
   resolved "https://registry.npmjs.org/@types/jsonwebtoken/-/jsonwebtoken-8.5.4.tgz"
   integrity sha512-4L8msWK31oXwdtC81RmRBAULd0ShnAHjBuKT9MRQpjP0piNrZdXyTRcKY9/UIfhGeKIT4PvF5amOOUbbT/9Wpg==
-  dependencies:
-    "@types/node" "*"
-
-"@types/jsonwebtoken@^8.5.8":
-  version "8.5.8"
-  resolved "https://registry.yarnpkg.com/@types/jsonwebtoken/-/jsonwebtoken-8.5.8.tgz#01b39711eb844777b7af1d1f2b4cf22fda1c0c44"
-  integrity sha512-zm6xBQpFDIDM6o9r6HSgDeIcLy82TKWctCXEPbJJcXb5AKmi5BNNdLXneixK4lplX3PqIVcwLBCGE/kAGnlD4A==
   dependencies:
     "@types/node" "*"
 
@@ -6234,9 +6227,14 @@ utils-merge@1.0.1:
   resolved "https://registry.npmjs.org/utils-merge/-/utils-merge-1.0.1.tgz"
   integrity sha1-n5VxD1CiZ5R7LMwSR0HBAoQn5xM=
 
-uuid@8.3.2, uuid@^8.0.0, uuid@^8.3.2:
+uuid@8.3.2, uuid@^8.0.0:
   version "8.3.2"
   resolved "https://registry.npmjs.org/uuid/-/uuid-8.3.2.tgz"
+  integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
+
+uuid@^8.3.2:
+  version "8.3.2"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
   integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
 
 v8-compile-cache-lib@^3.0.0:

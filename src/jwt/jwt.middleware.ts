@@ -19,9 +19,8 @@ export class JwtMiddleware implements NestMiddleware {
         if (payload instanceof JsonWebTokenError) {
           throw new Error(payload.message);
         }
-        const user = await this.usersService.findUserById(payload.userId);
         // ultimately, the purpose of using middleware is to change the res and res
-        req.user = user;
+        req.user = await this.usersService.getUserProfile(payload.userId);
       }
       next();
     } catch (error) {

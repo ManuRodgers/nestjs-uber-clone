@@ -9,7 +9,7 @@ import { hash, verify } from 'argon2';
 import { IsEmail, IsEnum, IsNotEmpty } from 'class-validator';
 import { GraphQLEmailAddress } from 'graphql-scalars';
 import { CommonEntity } from 'src/common/entities/common.entity';
-import { BeforeInsert, Column, Entity, Unique } from 'typeorm';
+import { BeforeInsert, BeforeUpdate, Column, Entity, Unique } from 'typeorm';
 
 enum UserRole {
   CLIENT,
@@ -30,9 +30,13 @@ export class User extends CommonEntity {
   email!: string;
 
   @Field(() => String, { nullable: false })
-  @Column({ nullable: false })
+  @Column({ nullable: false, select: false })
   @IsNotEmpty()
   password!: string;
+
+  @Field(() => Boolean, { nullable: false })
+  @Column({ nullable: false, default: false })
+  verified!: boolean;
 
   @Field(() => UserRole, { nullable: false })
   @Column({
@@ -46,17 +50,24 @@ export class User extends CommonEntity {
   role!: UserRole;
 
   @BeforeInsert()
+  @BeforeUpdate()
   async hashPassword(): Promise<void> {
     try {
-      this.password = await hash(this.password);
+      console.log('-> this.password', this.password);
+      if (this.password) {
+        this.password = await hash(this.password);
+      }
     } catch (error) {
       throw new InternalServerErrorException('Error hashing password');
     }
   }
 
-  async comparePassword(password: string): Promise<boolean> {
+  async comparePassword(
+    hashedPassword: string,
+    password: string,
+  ): Promise<boolean> {
     try {
-      return verify(this.password, password);
+      return verify(hashedPassword, password);
     } catch (error) {
       throw new InternalServerErrorException('Error comparing password');
     }

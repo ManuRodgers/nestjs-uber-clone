@@ -1,4 +1,4 @@
-import { Field } from '@nestjs/graphql';
+import { Field, ObjectType } from '@nestjs/graphql';
 import { GraphQLUUID } from 'graphql-scalars';
 import {
   CreateDateColumn,
@@ -6,6 +6,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
+@ObjectType()
 export class CommonEntity {
   @Field(() => GraphQLUUID, { nullable: false })
   @PrimaryGeneratedColumn('uuid')

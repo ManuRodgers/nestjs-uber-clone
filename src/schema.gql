@@ -29,12 +29,27 @@ type CreateUserOutput {
 }
 
 """
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+"""
 A field whose value conforms to the standard internet email address format as specified in RFC822: https://www.w3.org/Protocols/rfc822/.
 """
 scalar EmailAddress @specifiedBy(url: "https://www.w3.org/Protocols/rfc822/")
 
 type GetRestaurantsOutput {
   data: [Restaurant!]
+  error: String
+  ok: Boolean!
+}
+
+input GetUserProfileInput {
+  id: UUID!
+}
+
+type GetUserProfileOutput {
+  data: User
   error: String
   ok: Boolean!
 }
@@ -50,21 +65,18 @@ type LoginOutput {
   ok: Boolean!
 }
 
-type MeOutput {
-  data: User
-  error: String
-  ok: Boolean!
-}
-
 type Mutation {
   createRestaurant(createRestaurantInput: CreateRestaurantInput!): CreateRestaurantOutput!
   createUser(createUserInput: CreateUserInput!): CreateUserOutput!
   login(loginInput: LoginInput!): LoginOutput!
   updateRestaurant(updateRestaurantInput: UpdateRestaurantInput!): UpdateRestaurantOutput!
+  updateUser(updateUserInput: UpdateUserInput!): UpdateUserOutput!
+  verifyEmail(verifyEmailInput: VerifyEmailInput!): VerifyEmailOutput!
 }
 
 type Query {
-  me: MeOutput!
+  getUserProfile(getUserProfileInput: GetUserProfileInput!): GetUserProfileOutput!
+  me: GetUserProfileOutput!
   restaurants: GetRestaurantsOutput!
   users: [User!]!
 }
@@ -102,14 +114,38 @@ type UpdateRestaurantOutput {
   ok: Boolean!
 }
 
+input UpdateUserInput {
+  email: EmailAddress
+  password: String
+}
+
+type UpdateUserOutput {
+  data: User
+  error: String
+  ok: Boolean!
+}
+
 type User {
+  createdAt: DateTime!
   email: EmailAddress!
+  id: UUID!
   password: String!
   role: UserRole!
+  updatedAt: DateTime!
+  verified: Boolean!
 }
 
 enum UserRole {
   CLIENT
   DELIVERY
   OWNER
+}
+
+input VerifyEmailInput {
+  code: String!
+}
+
+type VerifyEmailOutput {
+  error: String
+  ok: Boolean!
 }
